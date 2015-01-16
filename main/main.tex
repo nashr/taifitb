@@ -1,0 +1,115 @@
+\documentclass{../taifitb/taIifitb}
+
+\input{../hyphenation/name}
+\input{../hyphenation/en}
+\input{../hyphenation/id}
+
+\input{../glossary/singkatan}
+\input{../glossary/istilah}
+\input{../glossary/lambang}
+
+\title{Pembangunan Kamus Indonesia-Jepang dari Korpus Dwibahasa dengan SVM}
+\author{Muhammad Nassirudin}
+\nim{13511044}
+
+\pembimbingI{Dr. Eng. Ayu Purwarianti, S.T.}
+\nipI{197701272008012011}
+% \pembimbingII{Ini Nama Bapak/Ibu Dosen II}
+% \nipII{Ini NIP Bapak/Ibu Dosen II}
+
+\begin{document}
+% [begin] Bagian persiapan
+% [begin] Halaman judul
+\subfile{../sections/judul}
+% [end] Halaman judul
+
+% [begin] Halaman ttd pembimbing
+\subfile{../sections/ttd1} % satu pembimbing
+% \subfile{../sections/ttd2} % dua pembimbing
+% [end] Halaman ttd pembimbing
+
+% [begin] Daftar isi
+\begin{center}
+\phantomsection
+\addcontentsline{toc}{section}{\textbf{\contentsnameX}}
+\pagenumbering{roman}
+\setcounter{page}{3}
+\tableofcontents
+\end{center}
+% [end] Daftar isi
+
+\newpage
+
+% [begin] Daftar lampiran
+\begin{center}
+\phantomsection
+\addcontentsline{toc}{section}{\textbf{\listappendicesnameX}}
+\listofappendices
+\end{center}
+% [end] Daftar lampiran
+
+\newpage
+
+% [begin] Daftar gambar
+\begin{center}
+\phantomsection
+\addcontentsline{toc}{section}{\textbf{\listfigurenameX}}
+\listoffigures
+\end{center}
+% [end] Daftar gambar
+
+\newpage
+
+% [begin] Daftar tabel
+\begin{center}
+\phantomsection
+\addcontentsline{toc}{section}{\textbf{\listtablenameX}}
+\listoftables
+\end{center}
+% [end] Daftar tabel
+
+\newpage
+
+% [begin] Daftar singkatan, istilah, dan lambang
+\renewcommand{\glossaryname}{DAFTAR SINGKATAN DAN ISTILAH}
+\printglossary[
+	title=\textbf{\hfill\large\glossaryname\hfill\vspace{22pt}},
+	toctitle=\textbf{\glossaryname},
+	style=mystyle
+]
+% [end] Daftar singkatan, istilah, dan lambang
+% [end] Bagian persiapan
+
+\newpage
+
+% [begin] Bab I
+\pagenumbering{arabic}
+\subfile{../sections/bab1}
+% [end] Bab I
+
+\newpage
+
+% [begin] Bab II
+\subfile{../sections/bab2}
+% [end] Bab II
+
+\newpage
+
+% [begin] Bab III
+\subfile{../sections/bab3}
+% [end] Bab III
+
+\newpage
+
+% [begin] Daftar pustaka
+\phantomsection
+\addcontentsline{toc}{section}{\textbf{\referencesnameX}}
+\printbibliography
+% [end] Daftar pustaka
+
+\newpage
+
+% [begin] Lampiran
+\subfile{../sections/lampiran}
+% [end] Lampiran
+\end{document}

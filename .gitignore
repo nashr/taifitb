@@ -1,12 +1,24 @@
-*.class
+# Produk build latex dkk
+*.acn
+*.acr
+*.alg
+*.apc
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdy
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# cache file
+*~

@@ -1,0 +1,87 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[bahasa]{babel}
+\usepackage{hyperref}
+\usepackage{paralist}
+
+\title{Petunjuk Penulisan Tugas Akhir I\\dengan \textit{Template} \LaTeX}
+\author{Muhammad Nassirudin}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Pendahuluan}
+\textit{Template} \LaTeX\ ini disesuaikan dengan format yang didefinisikan dalam buku "Pedoman Penulisan Laporan Tugas Akhir I" versi 1.0 yang disusun oleh tim tugas akhir program studi Teknik Informatika (2014).
+
+\section{Direktori Pengerjaan}
+Direktori pengerjaan laporan Tugas Akhir I mengikuti gambar \ref{gbr:direktori_pengerjaan}.
+
+\begin{figure}[htbp]
+	\begin{verbatim}
+	+ /
+	  + appendices
+	  + bibliography
+	  + figures
+	  + glossary
+	  + hyphenation
+	  + main
+	  + sections
+	  + taifitb
+	\end{verbatim}
+	\caption{Direktori pengerjaan}
+	\label{gbr:direktori_pengerjaan}
+\end{figure}
+
+\subsection{\tt appendices}
+Berisikan \textit{file} \LaTeX\ per lampiran (A, B, C, dst.).
+
+\subsection{\tt bibliography}
+Berisikan satu \textit{file} \verb|ref.bib| yang berisikan semua informasi daftar pustaka.
+
+\subsection{\tt figures}
+Berisikan semua \textit{file} gambar yang dipakai, termasuk (yang harus ada) adalah gambar \verb|itb.png|.
+
+\subsection{\tt glossary}
+Berisikan 3 buah \textit{file}: \verb|istilah.tex|, \verb|lambang.tex|, dan \verb|singkatan.tex| yang berturut-turut menyimpan informasi istilah, lambang, dan singkatan yang digunakan dalam laporan Tugas Akhir.
+
+\subsection{\tt hyphenation}
+Berisikan aturan-aturan pemenggalan kata. Setidaknya terdapat 2 buah \textit{file}: \verb|en.tex| untuk kata-kata bahasa Inggris dan \verb|id.tex| untuk kata-kata bahasa Indonesia.
+
+\subsection{\tt main}
+Berisikan satu \textit{file} \verb|main.tex|, yaitu akar dari semua \textit{file}.
+
+\subsection{\tt sections}
+Berisikan semua \textit{file} yang menjadi bab atau bagian penting dalam laporan Tugas Akhir. Setidaknya terdapat 7 buah \textit{file}, yaitu
+\begin{inparaenum}
+\item \verb|bab1.tex|,
+\item \verb|bab2.tex|,
+\item \verb|bab3.tex|,
+\item \verb|judul.tex|,
+\item \verb|lampiran.tex|,
+\item \verb|ttd1.tex|, dan
+\item \verb|ttd2.tex|.
+\end{inparaenum}
+
+\subsection{\tt taifitb}
+Berisikan \textit{template} \LaTeX\ dari laporan Tugas Akhir I beserta buku manualnya.
+
+\section{Halaman Judul}
+Halaman judul terdapat dalam \textit{file} \verb|/sections/judul.tex|. Teks judul dapat menempati 1 baris, 2 baris, atau 3 baris. Untuk penyesuaian, baris di bawah baris judul yang berisikan spasi (ditandai dengan \verb|~\\| dan bernomor baris mulai dari 10) dihapus/ditambahkan bergantung pada kebutuhan. Normalnya, 2 baris judul membutuhkan 2 spasi yang mengikutinya. Terdapat setidaknya 3 \textit{command} yang harus diisi dalam \textit{file} \verb|/main/main.tex|, yaitu \verb|title| (judul tugas akhir), \verb|author| (nama penulis), dan \verb|nim| (NIM penulis).
+
+\section{Halaman Tanda Tangan Pembimbing}
+Halaman tanda tangan pembimbing terdapat dalam \textit{file} \verb|/sections/ttd1.tex| (untuk satu orang pembimbing) dan \verb|/sections/ttd2.tex| (untuk dua orang pembimbing). Untuk mengubah lembar pembimbing yang dipakai (satu atau dua pembimbing), \textit{comment} atau \textit{uncomment} baris yang sesuai dalam \textit{file} \verb|/main/main.tex|. Sama seperti halaman judul, butuh penyesuaian spasi setelah baris judul. Normalnya, 2 baris judul membutuhkan 3 spasi yang mengikutinya. Informasi mengenai pembimbing I dan II dapat diisi ke dalam \textit{command} \verb|pembimbingI|, \verb|nipI|, \verb|pembimbingII|, dan \verb|nipII| di dalam \textit{file} \verb|/main/main.tex|.
+
+\section{Gambar}
+Semua \textit{file} gambar ditaruh di dalam folder \verb|/figures|. Lebar maksimum gambar adalah \verb|\figurewidth|.
+
+\section{Tabel}
+Lebar maksimum tabel adalah \verb|\tablewidth|. Untuk penomoran otomatis pada tabel, gunakan \textit{command} \verb|\tableitem|.
+
+\section{Lampiran}
+Kode yang menampilkan lampiran ada di dalam \textit{file} \verb|/main/main.tex| pada bagian \verb|Daftar lampiran| dan bagian \verb|Lampiran|. Jika tidak ada lampiran, \textit{comment} seluruh baris dalam kedua bagian tersebut. Daftar lampiran apa saja yang ingin ditampilkan disimpan dalam \textit{file} \verb|/sections/lampiran.tex|. Untuk kemodularan dan kemudahan membaca, \textit{file} tersebut hanya berisi nama \textit{file} tempat isi dari lampiran yang sebenarnya disimpan. \textit{File} yang berisikan lampiran tersebut dapat ditemukan di dalam folder \verb|/appendices|. Gunakan \textit{command} \verb|newappendix| untuk memberi judul lampiran (jika tidak ingin ada judul, tuliskan \verb|\newappendix{}| saja). Untuk menambahkan anak lampiran, gunakan \textit{command} \verb|\newsubappendix|.
+
+\section{Istilah, Lambang, dan Singkatan}
+Semua informasi mengenai istilah, lambang, dan singkatan disimpan di dalam \textit{file} \verb|/glossary/istilah.tex|, \verb|/glossary/lambang.tex|, dan \verb|/glossary/singkatan.tex| berturut-turut. Untuk pembangkitan tabelnya, diperlukan xindy. Konvensi yang dipakai adalah agar daftar terurut sesuai spek, tambahkan atribut \verb|sort| pada setiap informasi istilah/lambang/singkatan dan tambahkan angka 1 jika didahului huruf kapital dan 2 jika didahului huruf nonkapital.
+
+\end{document}

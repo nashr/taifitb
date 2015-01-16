@@ -1,0 +1,86 @@
+\documentclass[../main/main.tex]{subfiles}
+
+\begin{document}
+\bab{PENDAHULUAN}
+
+\subsection{Latar Belakang}
+Bertambah pesatnya perkembangan kerja sama antara Indonesia dan Jepang membuat semakin sering terjadinya interaksi antarbudaya dari masing-masing negara. Salah satu aspek yang tentunya juga terkena dampak adalah bahasa. Perbedaan bahasa merupakan sebuah kekayaan dunia, namun hal tersebut justru menjadi masalah ketika sebuah domain tertentu sudah terlibat. Bahasa yang berbeda menggunakan istilah yang berbeda untuk menyatakan satu hal yang sama, seperti \begin{CJK}{UTF8}{min}コンピューター\end{CJK} (konpyu-ta-) dalam bahasa Jepang yang berarti komputer dalam bahasa Indonesia. Perbedaan tersebut menjadi masalah karena menyebabkan sulitnya memastikan apakah orang yang berbahasa Indonesia akan memikirkan hal yang sama dengan orang yang berbahasa Jepang ketika disebutkan sebuah istilah dalam sebuah domain. Contohnya, kata "motor" di Indonesia identik dengan kendaraan yang bermesin dan beroda dua, sedangkan salah satu kata padanannya di Jepang, "\begin{CJK}{UTF8}{min}モーター\end{CJK}" (mo-ta-), identik dengan mesin yang menggerakkan sesuatu. Contoh nyata dari masalah tersebut adalah pembuatan buku panduan dari sebuah produk elektronik yang tentunya harus menggunakan istilah yang dapat dimengerti calon pembeli dari berbagai macam negara.
+
+Salah satu solusinya adalah pembuatan sebuah kamus Indonesia-Jepang spesifik domain. Solusi seperti ini pernah dilakukan sebelumnya oleh \textcite{lefever}. \textcite{lefever} membangun kamus multibahasa berdomain otomotif untuk 4 bahasa, yaitu Prancis, Inggris, Italia, dan Belanda. Pembangunan kamus tersebut ditujukan untuk meningkatkan konsistensi istilah teknis dalam sebuah perusahaan otomotif Prancis. Pembangunan kamus dilakukan menggunakan \gls{atr} yang merupakan salah satu topik dari \gls{nlp}. \Gls{atr} digunakan untuk mengekstrak istilah-istilah yang muncul bersamaan dari masing-masing bahasa secara otomatis melalui \gls{korpus}. Pembangunan kamus kemudian dilanjutkan dengan menyaring pasangan istilah tersebut berdasarkan pengukuran statistik.
+
+Sampai saat ini, dikenal 2 jenis korpus dalam ATR untuk pembuatan kamus dwibahasa, yaitu \parencite{koehn} korpus paralel dan korpus \textit{comparable}. Dua buah korpus dikatakan paralel jika yang satu merupakan translasi langsung dari korpus yang lain sementara dua buah korpus dikatakan \textit{comparable} jika yang satu bukan translasi langsung dari korpus yang lain, namun masih setopik. Ekstraksi istilah dari korpus paralel lebih mudah dibandingkan dari korpus \textit{comparable}, namun lebih sulit didapatkan. Sejauh ini, korpus paralel untuk pasangan bahasa Indonesia-Jepang dapat ditemukan pada buku-buku manual produk elektronik, sementara korpus \textit{comparable} dapat ditemukan dalam artikel-artikel Wikipedia\footnote{\url{https://www.wikipedia.org/}}.
+
+Teknik ATR dapat dilakukan dengan 2 macam pendekatan \parencite{lefever}, yaitu pendekatan linguistik dan pendekatan statistik. Pendekatan linguistik memanfaatkan informasi linguistik, seperti \gls{pos} \textit{tag}, frasa, dan pola sintaksis. Teknik yang menggunakan pendekatan linguistik antara lain pemanfaatan transliterasi untuk menangkap kata-kata yang memiliki akar bahasa yang sama \parencite{tsuji} dan pemanfaatan kamus dwibahasa yang sudah ada untuk menghitung peluang apakah sebuah pasangan kata adalah pasangan translasi \parencite{jagarlamudi}. Pendekatan statistik dilakukan dengan memilih sekelompok kata yang berdekatan (\gls{ngram}) dan menggunakan perhitungan statistik untuk menyaring pasangan kata yang ekuivalen. Teknik yang menggunakan pendekatan statistik pernah dilakukan oleh \textcite{daille} dengan melakukan ekstraksi SWT (\textit{single-word term}) dan MWT (\textit{multi-word term}) kemudian menggunakan pengukuran \textit{similarity vector} untuk melakukan \textit{alignment} kata per kata pada MWT. Selain itu, \textcite{lefever} juga menggunakan pendekatan statistik dengan melakukan pengenalan istilah melalui informasi frekuensi dan frekuensi \textit{$n$-gram} dari korpus.
+
+Pada praktiknya, kedua pendekatan tersebut tidaklah terpisah antara satu dengan yang lain. Terdapat beberapa penelitian terkait ATR yang mencoba menggabungkan fitur linguistik dan fitur statistik (pendekatan hibrid). Salah satunya adalah pekerjaan yang dilakukan oleh \textcite{aker}. Teknik yang dipakai terbilang cukup baru, yaitu dengan memandang ATR sebagai masalah klasifikasi: apakah setiap pasangan istilah dari masing-masing bahasa adalah pasangan translasi atau tidak. Klasifikasi sendiri dapat dilakukan secara otomatis oleh mesin yang merupakan salah satu topik dalam pembelajaran mesin. Salah satu teknik klasifikasi yang menjadi \textit{state-of-the-art} dalam pembelajaran mesin saat ini adalah \gls{svm} \parencite{christianini}.
+
+Pembuatan kamus Indonesia-Jepang pernah dilakukan sebelumnya oleh \textcite{limanthie}. Teknik yang digunakannya adalah dengan menghitung frekuensi pasangan kata dari setiap korpus. \textcite{limanthie} hanya mengambil kata benda sebagai kandidat istilah yang akan dipasangkan dan belum membuahkan hasil yang memuaskan. Tugas akhir ini berusaha membuat kamus Indonesia-Jepang yang memiliki kinerja yang lebih baik. Caranya dengan mengadopsi pendekatan yang dilakukan oleh \textcite{aker} yang disesuaikan dengan ciri-ciri pasangan bahasa Indonesia-Jepang.
+
+\subsection{Rumusan Masalah}
+\label{pendahuluan_rumusan_masalah}
+Pembuatan kamus dwibahasa Indonesia-Jepang spesifik domain yang pernah dilakukan oleh \textcite{limanthie} hanya menggunakan kamus dwibahasa sebagai fitur linguistiknya dan masih dibangun secara manual. Selain itu, teknik tersebut masih bergantung pada kualitas korpus yang bagus dan kinerjanya belum memuaskan. Di sisi lain, masih sedikitnya penelitian yang terkait juga merupakan sebuah masalah tersendiri yang menyebabkan bahasa Indonesia masih dalam status \textit{under-resource}. Oleh karena itu, perlu dilakukan sebuah penelitian yang melibatkan lebih banyak aspek linguistik dari bahasa Indonesia dengan melihat kualitas korpus yang terbatas. Penelitian dilakukan dengan cara berikut:
+\begin{enumerate}
+\item memaksimalkan penggunaan aspek linguistik;
+\item menggunakan teknik yang tidak bergantung pada jenis korpus; dan
+\item memanfaatkan pembelajaran mesin agar sistem dapat berkembang secara otomatis.
+\end{enumerate}
+
+\subsection{Tujuan}
+Terdapat 2 hal yang ingin dicapai dalam tugas akhir ini sebagai berikut.
+\begin{enumerate}
+\item Membuat sebuah sistem pembangunan kamus dwibahasa yang menggabungkan fitur linguistik dan fitur statistik tanpa bergantung pada jenis korpus yang dipakai.
+\item Membuat sebuah kamus Indonesia-Jepang dalam domain \textit{computer science} dengan presisi yang lebih baik dari kamus sebelumnya menggunakan pembelajaran mesin dengan algoritma klasifikasi biner SVM.
+\end{enumerate}
+
+\subsection{Batasan Masalah}
+Domain yang dilingkupi dalam tugas akhir ini hanya domain \textit{computer science}.
+
+\subsection{Metodologi}
+Pengerjaan tugas akhir ini dibagi dalam beberapa tahap sebagai berikut.
+\begin{enumerate}
+\item Perancangan desain solusi\\
+Pada tahap ini, dirancang sebuah sistem pembangunan kamus dwibahasa yang merupakan hasil dari studi literatur. Tahap-tahap berikutnya akan mengacu kepada sistem yang dibangun pada tahap ini.
+\item Pengumpulan kakas dan data\\
+Pada tahap ini, dikumpulkan berbagai data yang dibutuhkan dalam pembangunan kamus. Data yang dibutuhkan adalah
+\begin{inparaenum}[(1)]
+\item korpus dalam bahasa Indonesia dan Jepang,
+\item kamus latih,
+\item data latih, dan
+\item data uji.
+\end{inparaenum}
+Selain itu, dikumpulkan juga kakas-kakas pemrosesan bahasa alami untuk teks seperti \textit{statistical machine translation} serta kakas untuk pembelajaran.
+\item Implementasi\\
+Pada tahap ini, semua data dan kakas yang telah dikumpulkan digunakan untuk mengimplementasikan model yang telah dibuat. Implementasi lebih menekankan pada optimasi pembelajaran melalui \textit{tuning} parameter algoritma pembelajaran. Selain itu, dilakukan juga optimasi terhadap data latih yang telah dibuat pada tahap sebelumnya. Tahap ini menghasilkan sebuah model pembelajaran yang dapat dipakai untuk membangun kamus.
+\item Pengujian\\
+Pada tahap ini, dilakukan 2 macam pengujian. Yang pertama adalah pengujian tertutup, yaitu model pembelajaran diuji dengan data latih. Yang kedua adalah pengujian terbuka, yaitu model pembelajaran diuji dengan korpus yang tidak dipakai sebagai data latih. Pada akhir tahap ini didapatkan nilai presisi dari masing-masing pengujian.
+\end{enumerate}
+
+\subsection{Jadwal Pelaksanaan Tugas Akhir}
+Jadwal pelaksanaan tugas akhir per minggu diberikan pada Tabel \ref{tbl:jadwal_tugas_akhir}.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Jadwal pelaksanaan tugas akhir}
+	\label{tbl:jadwal_tugas_akhir}
+	\begin{tabular}{|p{\tablewidth/5}|*{24}{p{\tablewidth/512}|}}
+		\hline
+		{} & \multicolumn{4}{|c|}{Des} & \multicolumn{4}{|c|}{Jan} & \multicolumn{4}{|c|}{Feb} & \multicolumn{4}{|c|}{Mar} & \multicolumn{4}{|c|}{Apr} & \multicolumn{4}{|c|}{Mei}\\ \hline
+		{} & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4\\ \hline
+		\multicolumn{25}{|l|}{\bfseries Perancangan Desain Solusi}\\ \hline
+		Pembuatan arsitektur  & & & & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & & & & & & & & & & & & & & & & & & \\ \hline
+		\multicolumn{25}{|l|}{\bfseries Pengumpulan Kakas dan Bahan}\\ \hline
+		Pengumpulan korpus    & & & & & & \cellcolor{gray} & \cellcolor{gray} & & & & & & & & & & & & & & & & & \\ \hline
+		Pembuatan data latih  & & & & & & & \cellcolor{gray} & \cellcolor{gray} & & & & & & & & & & & & & & & & \\ \hline
+		Pembuatan data uji    & & & & & & & \cellcolor{gray} & \cellcolor{gray} & & & & & & & & & & & & & & & & \\ \hline
+		Pembuatan kamus latih & & & & & & & & \cellcolor{gray} & \cellcolor{gray} & & & & & & & & & & & & & & & \\ \hline
+		Pengumpulan kakas     & & & & & & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & & & & & & & & & & & & & & & \\ \hline
+		\multicolumn{25}{|l|}{\bfseries Implementasi}\\ \hline
+		Optimasi data latih   & & & & & & & & & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & & & & & & & & & & & \\ \hline
+		Pembelajaran mesin    & & & & & & & & & & & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} & & & & \\ \hline
+		\multicolumn{25}{|l|}{\bfseries Pengujian}\\ \hline
+		Pengujian tertutup    & & & & & & & & & & & & & & & & & & & & & \cellcolor{gray} & & & \\ \hline
+		Pengujian terbuka     & & & & & & & & & & & & & & & & & & & & & & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray}\\ \hline
+	\end{tabular}
+\end{table}
+
+\end{document}
